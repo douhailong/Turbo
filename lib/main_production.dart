@@ -1,6 +1,9 @@
+import 'package:api_repository/api_repository.dart';
 import 'package:turbo/app/app.dart';
 import 'package:turbo/bootstrap.dart';
 
 void main() {
-  bootstrap(() => const App());
+  const apiRepository = ApiRepository();
+
+  bootstrap(() => const App(apiRepository: apiRepository));
 }

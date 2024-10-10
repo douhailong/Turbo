@@ -1,22 +1,19 @@
+import 'package:api_repository/api_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:turbo/counter/counter.dart';
-import 'package:turbo/l10n/l10n.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:turbo/app/view/app_view.dart';
+import 'package:turbo/todo/cubit/todo_cubit.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({required this.apiRepository, super.key});
+
+  final ApiRepository apiRepository;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
-        useMaterial3: true,
-      ),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+    return BlocProvider(
+      create: (context) => TodoCubit(apiRepository: apiRepository),
+      child: const AppView(),
     );
   }
 }
